@@ -24,7 +24,7 @@ jobs:
       - name: Raise PR
         uses: peter-evans/create-pull-request@v3
         with:
-          branch: "update-jira-swaggers"
+          branch: "latest"
           base: main
           title: "Update Jira Swaggers"
           committer: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
@@ -32,4 +32,3 @@ jobs:
           body: Update Jira Swaggers
           commit-message: Auto update Jira swaggers
           token: ${{ secrets.GITHUB_TOKEN }}
-          delete-branch: true
