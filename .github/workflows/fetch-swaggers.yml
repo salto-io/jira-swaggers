@@ -1,0 +1,35 @@
+name: Fetch Swaggers
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: 0 0 * * *
+
+jobs:
+  fetch-swaggers:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checking out code
+        uses: actions/checkout@v2
+
+      - name: extract git commit data
+        uses: rlespinasse/git-commit-data-action@v1.x
+
+      - name: Fetch Software Swagger
+        run: wget -O swagger.v3.json https://developer.atlassian.com/cloud/jira/software/swagger.v3.json
+
+      - name: Fetch Platform Swagger
+        run: wget -O swagger-v3.v3.json https://developer.atlassian.com/cloud/jira/platform/swagger-v3.v3.json
+
+      - name: Raise PR
+        uses: peter-evans/create-pull-request@v3
+        with:
+          branch: "update-jira-swaggers"
+          base: main
+          title: "Update Jira Swaggers"
+          committer: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
+          author: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
+          body: Update Jira Swaggers
+          commit-message: Auto update Jira swaggers
+          token: ${{ secrets.GITHUB_TOKEN }}
+          delete-branch: true
