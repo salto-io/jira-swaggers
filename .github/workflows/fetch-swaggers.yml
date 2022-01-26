@@ -16,10 +16,10 @@ jobs:
         uses: rlespinasse/git-commit-data-action@v1.x
 
       - name: Fetch Software Swagger
-        run: wget -O swagger.v3.json https://developer.atlassian.com/cloud/jira/software/swagger.v3.json
+        run: wget -O software-swagger.v3.json https://developer.atlassian.com/cloud/jira/software/swagger.v3.json
 
       - name: Fetch Platform Swagger
-        run: wget -O swagger-v3.v3.json https://developer.atlassian.com/cloud/jira/platform/swagger-v3.v3.json
+        run: wget -O platform-swagger.v3.json https://developer.atlassian.com/cloud/jira/platform/swagger-v3.v3.json
 
       - name: Raise PR
         uses: peter-evans/create-pull-request@v3
