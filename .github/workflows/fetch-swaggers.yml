@@ -18,8 +18,14 @@ jobs:
       - name: Fetch Software Swagger
         run: wget -O software-swagger.v3.json https://developer.atlassian.com/cloud/jira/software/swagger.v3.json
 
+      - name: Prettify Software Swagger
+        run: python -m json.tool software-swagger.v3.json > software-swagger.v3.pretty.json
+
       - name: Fetch Platform Swagger
         run: wget -O platform-swagger.v3.json https://developer.atlassian.com/cloud/jira/platform/swagger-v3.v3.json
+
+      - name: Prettify Platform Swagger
+        run: python -m json.tool platform-swagger.v3.json > platform-swagger.v3.pretty.json
 
       - name: Raise PR
         uses: peter-evans/create-pull-request@v3
